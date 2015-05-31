@@ -13,6 +13,7 @@ var config = require('./gulp.config')();
 //var gulpif = require('gulp-if');
 
 gulp.task('vet', function() {
+    console.log('Analyzing source with JSHint and JSCS');
     return gulp
         .src(config.alljs)
         .pipe($.if(args.verbose, $.print()))
@@ -20,4 +21,13 @@ gulp.task('vet', function() {
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish'), {verbose: true})
         .pipe($.jshint.reporter('fail'));
+});
+
+gulp.task('styles', function() {
+    console.log('Compiling Less ---> CSS');
+    return gulp
+        .src(config.less)
+        .pipe($.less())
+        .pipe($.autoprefixer({browsers:['last 2 versions', '> 5%']}))
+        .pipe(gulp.dest(config.temp));
 });
