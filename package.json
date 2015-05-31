@@ -1,7 +1,6 @@
 {
   "name": "gulp",
-  "version": "0.0.0"
-  ,
+  "version": "0.0.0",
   "scripts": {
     "init": "npm install",
     "install": "bower install",
@@ -20,6 +19,7 @@
     "gulp-if": "^1.2.5",
     "gulp-jscs": "^1.6.0",
     "gulp-jshint": "^1.11.0",
+    "gulp-load-plugins": "^0.10.0",
     "gulp-print": "^1.1.0",
     "gulp-util": "^3.0.5",
     "jshint-stylish": "^2.0.0",
