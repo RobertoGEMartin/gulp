@@ -1,11 +1,22 @@
 {
-  "name": "gulp",
-  "version": "0.0.0",
-  "scripts": {
-    "init": "npm install",
-    "install": "bower install",
-    "start": "node src/server/app.js"
-  },
+    "name": "Gulp-Patterns",
+    "version": "0.2.0",
+    "description": "Gulp Patterns",
+    "authors": [
+        "John Papa"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/johnpapa/gulp-patterns",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/johnpapa/gulp-patterns.git"
+    },
+    "scripts": {
+        "init": "npm install",
+        "install": "bower install",
+        "start": "node src/server/app.js",
+        "test": "gulp test"
+    },
   "dependencies": {
     "body-parser": "^1.8.2",
     "compression": "^1.1.0",
@@ -19,6 +30,7 @@
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.3.0",
     "gulp-if": "^1.2.5",
+    "gulp-inject": "^1.2.0",
     "gulp-jscs": "^1.6.0",
     "gulp-jshint": "^1.11.0",
     "gulp-less": "^3.0.3",
@@ -27,6 +39,7 @@
     "gulp-print": "^1.1.0",
     "gulp-util": "^3.0.5",
     "jshint-stylish": "^2.0.0",
+    "wiredep": "^2.2.2",
     "yargs": "^3.10.0"
   }
 }

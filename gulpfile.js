@@ -14,7 +14,8 @@ var $ = require('gulp-load-plugins')({lazy: true});
 //var gulpprint = require('gulp-print');
 //var gulpif = require('gulp-if');
 
-gulp.task('vet', function() {
+
+gulp.task('vet', function () {
     console.log('Analyzing source with JSHint and JSCS');
     return gulp
         .src(config.alljs)
@@ -25,28 +26,53 @@ gulp.task('vet', function() {
         .pipe($.jshint.reporter('fail'));
 });
 
-gulp.task('styles', ['clean-styles'] , function() {
+
+gulp.task('styles', ['clean-styles'], function () {
     console.log('Compiling Less ---> CSS');
     return gulp
         .src(config.less)
         .pipe($.plumber())
         .pipe($.less())
         //.on('error',errorLogger())
-        .pipe($.autoprefixer({browsers:['last 2 versions', '> 5%']}))
+        .pipe($.autoprefixer({browsers: ['last 2 versions', '> 5%']}))
         .pipe(gulp.dest(config.temp));
 });
 
-gulp.task('clean-styles', function(done) {
+
+gulp.task('clean-styles', function (done) {
     console.log('Cleaning files');
     var files = config.temp + '**/*.css';
-    clean(files,done);
+    clean(files, done);
 
 });
 
-gulp.task('less-watcher',function(){
-    gulp.watch([config.less],['styles']);
+
+gulp.task('less-watcher', function () {
+    gulp.watch([config.less], ['styles']);
 });
 
+
+gulp.task('wiredep', function () {
+    console.log('Wire up the bower css js and our app js into the html');
+    var options = config.getWiredepDefaultOptions();
+    var wiredep = require('wiredep').stream;
+
+    return gulp
+        .src(config.index)
+        .pipe(wiredep(options))
+        .pipe($.inject(gulp.src(config.js)))
+        .pipe(gulp.dest(config.client));
+});
+
+
+gulp.task('inject', ['wiredep', 'styles'],  function () {
+    console.log('inject');
+
+    return gulp
+        .src(config.index)
+        .pipe($.inject(gulp.src(config.css)))
+        .pipe(gulp.dest(config.client));
+});
 
 ///////////
 //function errorLogger(error){
@@ -56,7 +82,32 @@ gulp.task('less-watcher',function(){
 //    this.emit('end');
 //}
 
-function clean(path,done) {
+
+function clean(path, done) {
     console.log('Cleaning files: ' + path);
-    del(path,done);
+    del(path, done);
 }
+
+
+//////////////////
+//1º Search errors&problems in code
+//jshint
+//jscs
+//
+//2º
+//Add prefixes to CSS
+//Autoprefixer
+//https://github.com/postcss/autoprefixer
+//PostCSS plugin to parse CSS and add vendor prefixes to CSS rules using values from Can I Use.
+//It is recommended by Google and used in Twitter, and Taobao.
+//http://caniuse.com/
+//https://github.com/ai/browserslist
+//Get browsers versions that matches given criterias like in Autoprefixer
+//
+//3º
+//Compile Less --> CSS
+//
+//4ºAdd script dependencies (.css & .js) to index.html
+//Bower
+//Wiredep
+
