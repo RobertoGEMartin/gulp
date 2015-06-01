@@ -15,6 +15,7 @@
     "serve-favicon": "^2.0.1"
   },
   "devDependencies": {
+    "del": "^1.2.0",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.3.0",
     "gulp-if": "^1.2.5",
@@ -22,6 +23,7 @@
     "gulp-jshint": "^1.11.0",
     "gulp-less": "^3.0.3",
     "gulp-load-plugins": "^0.10.0",
+    "gulp-plumber": "^1.0.1",
     "gulp-print": "^1.1.0",
     "gulp-util": "^3.0.5",
     "jshint-stylish": "^2.0.0",
